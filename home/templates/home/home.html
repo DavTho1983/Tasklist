@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for task in tasks %}
+  <div class="row pt-3">
+      <h1>{{ task.title }}</h1>
+      <br>
+      <p>{{ task.pub_date_pretty }}</p>
+      <br>
+      <p>{{ task.summary }}</p>
+      <br>
+      <br>
+      <p>{{ task.user }}</p>
+      <br>
+      <br>
+  </div>
+  <div class="row pt-3">
+    <a class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a>
+  </div>
+{% endfor %}
+
+<br>
+<br>
+
+<a class="btn btn-primary" href="{% url 'create' %}">Create</a>
+
+{% endblock %}
