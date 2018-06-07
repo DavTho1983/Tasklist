@@ -1,28 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <div class="container">
+    <table class="table">
+      <thead>
+        <th scope="col">Task Title</th>
+        <th scope="col">Publication Date</th>
+        <th scope="col">Description</th>
+        <th scope="col">Completed</th>
+        <th scope="col">User</th>
+        <th scope="col"></th>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <th scope="row">{{ task.title }}</th>
+            <td>{{ task.pub_date_pretty }}</td>
+            <td>{{ task.summary }}</td>
+            <td>{{ task.completed }}</td>
+            <td>{{ task.user }}</td>
+            <td><a class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-{% for task in tasks %}
-  <div class="row pt-3">
-      <h1>{{ task.title }}</h1>
-      <br>
-      <p>{{ task.pub_date_pretty }}</p>
-      <br>
-      <p>{{ task.summary }}</p>
-      <br>
-      <br>
-      <p>{{ task.user }}</p>
-      <br>
-      <br>
-  </div>
-  <div class="row pt-3">
-    <a class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a>
-  </div>
-{% endfor %}
 
 <br>
 <br>
-
-<a class="btn btn-primary" href="{% url 'create' %}">Create</a>
-
+<div class="row pt-8">
+  <div class="col-3">
+    <a class="btn btn-primary" href="{% url 'create' %}">Create</a>
+  </div>
+</div>
 {% endblock %}
