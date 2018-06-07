@@ -10,7 +10,10 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def summary(self):
-        return self.description[:50]
+        if len(self.description) < 30:
+            return self.description
+
+        return self.description[:30] + "..."
 
     def pub_date_pretty(self):
         return self.pub_date.strftime('%b %e %Y')

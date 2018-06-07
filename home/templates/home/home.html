@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
   <div class="container">
-    <table class="table">
+    <table class="table table-sm">
       <thead>
-        <th scope="col">Task Title</th>
-        <th scope="col">Publication Date</th>
-        <th scope="col">Description</th>
-        <th scope="col">Completed</th>
-        <th scope="col">User</th>
-        <th scope="col"></th>
+        <th class="align-text-top" scope="col">Task Title</th>
+        <th class="align-text-top"  scope="col">Publication Date</th>
+        <th class="align-text-top"  scope="col">Description</th>
+        <th class="align-text-top"  scope="col">Completed</th>
+        <th class="align-text-top"  scope="col">User</th>
+        <th class="align-text-top"  scope="col"></th>
       </thead>
       <tbody>
         {% for task in tasks %}
-          <tr>
+          <tr {% if task.completed %} class="table-active" {% endif %}>
             <th scope="row">{{ task.title }}</th>
             <td>{{ task.pub_date_pretty }}</td>
             <td>{{ task.summary }}</td>
-            <td>{{ task.completed }}</td>
+            <td><input type=checkbox onclick="return false;" onkeydown="return false;" {% if task.completed %} checked="checked" {% endif %}/></td>
             <td>{{ task.user }}</td>
-            <td><a class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a></td>
+            <td>
+              {% if user.is_authenticated %}
+                {% if request.user.is_superuser or request.user == task.user %}
+                  <a class="btn btn-primary" href="{% url 'edit' task.id %}">Edit</a>
+                  <form action="{% url 'markcompleted' task.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Mark Completed</button>
+                  </form>
+                {% endif %}
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>
@@ -29,9 +40,19 @@
 
 <br>
 <br>
-<div class="row pt-8">
-  <div class="col-3">
-    <a class="btn btn-primary" href="{% url 'create' %}">Create</a>
-  </div>
-</div>
+  {% if user.is_authenticated %}
+    <div class="container">
+      <div class="row pt-9">
+        <div class="col-9">
+          <span></span>
+        </div>
+        <div class="col-3">
+          <a class="btn btn-primary float-right" href="{% url 'create' %}">Add</a>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+  {% endif %}
+
 {% endblock %}

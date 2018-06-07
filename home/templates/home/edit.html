@@ -6,14 +6,68 @@
 
   <form method="POST">
     {% csrf_token %}
-    {{ form }}
-    <button class="btn btn-primary" type="submit">Save</button>
+    <div class="row pt-8">
+      <div class="col-2">
+        <p>Title:  </p>
+      </div>
+      <div class="col-6">
+        {{ form.title }}
+      </div>
+    </div>
+    <div class="row pt-8">
+      <div class="col-2">
+        <p>Publication Date:  </p>
+      </div>
+      <div class="col-6">
+        {{ task.pub_date }}
+      </div>
+    </div>
+    <div class="row pt-8">
+      <div class="col-2">
+        <p>Task Description:  </p>
+      </div>
+      <div class="col-6">
+        {{ form.description }}
+      </div>
+    </div>
+    <div class="row pt-8">
+      <div class="col-2">
+        <p>Completed :  </p>
+      </div>
+      <div class="col-6">
+        {{ form.completed }}
+      </div>
+    </div>
+    <div class="row pt-8">
+      <div class="col-2">
+        <p>Task Owner :  </p>
+      </div>
+      <div class="col-6">
+        {{ task.user }}
+      </div>
+    </div>
+    <div class="row pt-8">
+      <div class="col-6">
+        <span></span>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </div>
   </form>
-
-  <form action="{% url 'delete' task.id %}" method="POST">
-    {% csrf_token %}
-    <button class="btn btn-primary" type="submit">Delete</button>
-  </form>
-
+  <br>
+  <br>
+  <br>
+  <div class="row pt-8">
+    <div class="col-6">
+      <span></span>
+    </div>
+    <div class="col-2">
+      <form action="{% url 'delete' task.id %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}

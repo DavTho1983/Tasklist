@@ -46,3 +46,8 @@ def delete(request, task_id):
         return redirect('home')
 
     return redirect('home')
+
+@login_required
+def markcompleted(request, task_id):
+
+    return redirect('home')
