@@ -8,6 +8,10 @@ def home(request):
     tasks = Task.objects
     return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date')})
 
+def hide(request):
+    tasks = Task.objects
+    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date').filter(completed=False)})
+
 def taskdetail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     return render(request, 'home/taskdetail.html', {'task':task})
@@ -49,5 +53,7 @@ def delete(request, task_id):
 
 @login_required
 def markcompleted(request, task_id):
-
+    task = Task.objects.get(id=task_id)
+    task.completed = True if task.completed == False else False
+    task.save()
     return redirect('home')
