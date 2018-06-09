@@ -50,7 +50,11 @@
     <div class="container">
       <div class="row pt-9">
           <div class="col-3">
-            <a class="btn btn-primary" href="{% url 'hide' %}" data-toggle="tooltip" data-placement="top" title="Hide Completed Tasks"><i class="fas fa-eye-slash"></i></a>
+              {% if flag %}
+                  <a class="btn btn-primary" href="{% url 'home' %}" data-toggle="tooltip" data-placement="top" title="Show Completed Tasks"><i class="fas fa-eye"></i></a>
+              {% else %}
+                  <a class="btn btn-primary" href="{% url 'hide' %}" data-toggle="tooltip" data-placement="top" title="Hide Completed Tasks"><i class="fas fa-eye-slash"></i></a>
+              {% endif %}
           </div>
           {% if user.is_authenticated %}
           <div class="col-6">

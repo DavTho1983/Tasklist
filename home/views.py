@@ -6,11 +6,13 @@ from django.utils import timezone
 
 def home(request):
     tasks = Task.objects
-    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date')})
+    flag = False
+    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'flag':flag})
 
 def hide(request):
     tasks = Task.objects
-    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date').filter(completed=False)})
+    flag = True
+    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date').filter(completed=False), 'flag':flag})
 
 def taskdetail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
