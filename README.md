@@ -1,7 +1,7 @@
 # Tasklist
 A Tasklist app in Django
 
-This app allows users to sign up for an acount, then log in to their account and create tasks.
+This app allows users to sign up for an account, then log in to their account and create tasks.
 
 Users cannot create/edit/delete tasks for other users.
 
