@@ -63,6 +63,16 @@ DATABASES = {
 
 Change this part so the DATABASES field uses the username, password and ports you created earlier in the Postgres App. It is usual to use port 5432, but in my development environment I used 5434.
 
+An email_info.py file needs to be added to make the email functionality work. It should be added to the same folder as settings.py and contain these fields:
+
+DEFAULT_FROM_EMAIL = 'your_email'
+SERVER_EMAIL = 'your_email'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'your_email'
+EMAIL_HOST_PASSWORD = 'your_email_password'
+
 Now in the terminal type:
 
 'python manage.py makemigrations'
