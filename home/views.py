@@ -4,10 +4,24 @@ from .models import Task
 from .forms import Taskform
 from django.utils import timezone
 
+from .tasks import add
+
 def home(request):
     tasks = Task.objects
     flag = False
     return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'flag':flag})
+
+def asynch(request):
+
+    if request.method == 'POST':
+        input_1 = request.POST['input_1']
+        input_2 = request.POST['input_2']
+        try:
+            result = add(input_1, input_2)
+            return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'input_1':input_1, 'input_2':input_2, 'result':result} )
+        except:
+            return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'error':'please enter two numbers'} )
+
 
 def hide(request):
     tasks = Task.objects
