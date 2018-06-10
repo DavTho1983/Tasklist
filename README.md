@@ -1,7 +1,7 @@
 # Tasklist
 A Tasklist app in Django
 
-
+<img src="ScreenShot.png" alt="">
 
 SETUP
 
@@ -24,6 +24,8 @@ Create a virtualenv by typing 'virtualenv myvenv'
 Activate the virtualenv by typing 'source myvenv/bin/activate'
 
 Install django to myvenv by typing 'pip install django'
+
+Install celery with 'pip install celery'
 
 Now clone the project with 'git clone https://github.com/DavTho1983/Tasklist.git'
 
