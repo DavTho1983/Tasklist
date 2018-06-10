@@ -1,6 +1,13 @@
 # Tasklist
 A Tasklist app in Django
 
+This app allows users to sign up for an acount, then log in to their account and create tasks.
+
+Users cannot create/edit/delete tasks for other users.
+
+A show/hide button shows or hides completed tasks.
+
+
 <img src="ScreenShot.png" alt="">
 
 SETUP
