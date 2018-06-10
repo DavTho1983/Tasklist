@@ -9,7 +9,13 @@ from .tasks import add
 def home(request):
     tasks = Task.objects
     flag = False
-    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'flag':flag})
+    return render(request, 'home/home.html', {'tasks': tasks.order_by('-pub_date'), 'flag':flag})
+
+def search(request):
+    if request.method == 'POST':
+        searchquery = request.POST['searchquery']
+        tasks = Task.objects.filter(title__contains=searchquery)
+        return render(request, 'home/home.html', {'tasks': tasks.order_by('-pub_date')})
 
 def asynch(request):
 
@@ -26,7 +32,7 @@ def asynch(request):
 def hide(request):
     tasks = Task.objects
     flag = True
-    return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date').filter(completed=False), 'flag':flag})
+    return render(request, 'home/home.html', {'tasks': tasks.order_by('-pub_date').filter(completed=False), 'flag':flag})
 
 def taskdetail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)

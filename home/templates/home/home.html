@@ -3,6 +3,12 @@
 {% block content %}
 
   <div class="container">
+    <form action="{% url 'search' %}" method="POST">
+      {% csrf_token %}
+      <label for="searchquery">Search</label>
+      <input type="text" name="searchquery">
+      <button class="btn btn-success" type="submit" data-toggle="tooltip" data-placement="top" title="Search"><i class="fas fa-search"></i></button>
+    </form>
     <table class="table table-sm">
       <thead>
         <th class="align-text-top" scope="col">Task Title</th>
