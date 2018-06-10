@@ -7,6 +7,8 @@ Users cannot create/edit/delete tasks for other users.
 
 A show/hide button shows or hides completed tasks.
 
+When an account is created, an email is sent to the user's email address.
+
 At the bottom of the screen, a form allows access to an asynchronous task using celery. The task is just simple addition, but the structure of the project allows more complex tasks to be built into the project later.
 
 
