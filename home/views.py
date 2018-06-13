@@ -18,6 +18,7 @@ def search(request):
         tasks = Task.objects.filter(title__contains=searchquery)
         return render(request, 'home/home.html', {'tasks': tasks.order_by('-pub_date')})
 
+@login_required
 def asynch(request):
 
     if request.method == 'POST':
