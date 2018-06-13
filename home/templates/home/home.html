@@ -77,22 +77,24 @@
 <br>
 <br>
 
-<form action="{% url 'asynch' %}" method="POST" name="AddForm">
-  {% csrf_token %}
-  <h2>Enter two numbers to be added in an asynchronous task</h2>
-  <label for="input_1">First Number</label>
-  <input type="number" name="input_1">
-  <label for="input_2">Second Number</label>
-  <input type="number" name="input_2">
-  <button  class="btn btn-success" type="submit" data-toggle="tooltip" data-placement="top" title="Add Asynchronously!"><i class="fas fa-plus-square"></i></button>
-  {% if input_1 and input_2 %}
-    <h1>{{ input_1 }} + {{ input_2 }} = {{ result }}</h1>
-  {% endif %}
-  {% if error %}
-    <br>
-    <h3>{{ error }}</h3>
-  {% endif %}
-</form>
+{% if user.is_authenticated %}
+  <form action="{% url 'asynch' %}" method="POST" name="AddForm">
+    {% csrf_token %}
+    <h2>Enter two numbers to be added in an asynchronous task</h2>
+    <label for="input_1">First Number</label>
+    <input type="number" name="input_1">
+    <label for="input_2">Second Number</label>
+    <input type="number" name="input_2">
+    <button  class="btn btn-success" type="submit" data-toggle="tooltip" data-placement="top" title="Add Asynchronously!"><i class="fas fa-plus-square"></i></button>
+    {% if input_1 and input_2 %}
+      <h1>{{ input_1 }} + {{ input_2 }} = {{ result }}</h1>
+    {% endif %}
+    {% if error %}
+      <br>
+      <h3>{{ error }}</h3>
+    {% endif %}
+  </form>
+{% endif %}
 
 
 

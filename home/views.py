@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Task
 from .forms import Taskform
 from django.utils import timezone
+from django.urls import reverse
 
 from .tasks import add
 
@@ -27,7 +28,8 @@ def asynch(request):
             return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'input_1':input_1, 'input_2':input_2, 'result':result} )
         except:
             return render(request, 'home/home.html', {'tasks': Task.objects.all().order_by('-pub_date'), 'error':'please enter two numbers'} )
-
+    else:
+        return render(request, 'home/home.html', {'tasks': tasks.order_by('-pub_date')})
 
 def hide(request):
     tasks = Task.objects
